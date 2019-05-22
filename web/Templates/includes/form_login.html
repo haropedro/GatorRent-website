@@ -1,0 +1,28 @@
+<form class="w-25" method="post" onsubmit="return validateRecaptcha();">
+   <h3>Login to GatorRent</h3>
+      <div class="form-group my-4">
+         <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required autofocus>
+         </div>
+         <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+            <small>Forgot your <a href="#">password</a>?</span></small>
+            <div class="row justify-content-center">
+               {% include "includes/reCaptcha.html" %}
+            </div>
+         </div>
+      </div>
+      {% with errors = get_flashed_messages() %}
+         {% if errors %}
+            {% for e in errors %}
+            <div class="alert alert-warning">
+               {{e}}
+            </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+      <button class="btn btn-primary w-100" type="submit" value="login">Login</button>
+      <small>Need an account? <a href="{{ url_for('register') }}">Register</a></small>
+</form>

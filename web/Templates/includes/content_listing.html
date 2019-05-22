@@ -1,0 +1,103 @@
+<div class="row w-75 p-5 justify-content-center">
+      {% for n in listing %}
+      <h3 class="mb-3 w-100 text-center text-capitalize">{{n.19}}</h3>
+      {% endfor %}
+      <!-- Image carousel -->
+      <div class="row w-75 p-3">
+         <div class="col-8">
+            <div id="carouselListing" class="carousel slide bg-dark h-100" data-ride="carousel" data-interval="false">
+               <div class="carousel-inner">
+               {% for p in path %}
+                  {% if loop.index == 1 %}
+                  <div class="carousel-item active">
+                  {% else %}
+                  <div class="carousel-item">
+                  {% endif%}
+                     <img class="d-block w-100" width="864" height="486" src="{{url_for('static', filename=p)}}" alt="{{p}}">
+                  </div>
+               {% endfor %}
+               </div>
+               <a class="carousel-control-prev" href="#carouselListing" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+               </a>
+               <a class="carousel-control-next" href="#carouselListing" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+               </a>
+            </div>
+         </div>
+         <div class="col-4">
+            {% for n in listing %}
+               {% include "includes/maps.html" %}
+            {% endfor %}
+         </div>
+      </div>
+      <!-- Property Details -->
+      {% for n in listing %}
+      <div class="row w-75 border-top p-3">
+         <div class="col-8">
+            <div class="row">
+                  {% if n.2  == 1 %}
+                  An apartment
+                  {% elif n.2 == 2 %}
+                  A house
+                  {% else %}
+                  A room
+                  {% endif %}
+                  in {{n.8}}, {{n.9}}, {{n.12}}, {{n.11}}
+            </div>
+            <div class="row">
+               ${{n.3}} per month.
+            </div>
+            <div class="row">
+               {{n.4}} miles from SFSU campus.
+            </div>
+            <div class="row mt-4">
+                  {% if n.6  == 1 %}
+                     <span class="badge badge-primary p-2"><i class="fas fa-door-open pr-3"></i>Single room</span>
+                  {% else %}
+                     <span class="badge badge-primary p-2"><i class="fas fa-door-open pr-3"></i>Shared room</span>
+                  {% endif%}
+                  {% if n.5  == 1 %}
+                     <span class="badge badge-primary mx-3 p-2"><i class="fas fa-paw pr-3"></i>Pets allowed</span>
+                  {% else %}
+                     <span class="badge badge-secondary mx-3 p-2"><i class="fas fa-paw pr-3"></i>Pets not allowed</span>
+                  {% endif%}
+            </div>
+         </div>
+         <!-- Lister card -->
+         <div class="col-4">
+            <div class="card text-center">
+               <div class="card-body">
+                     <small>Property listed by</small>
+                     <h6 class="card-title text-capitalize py-2">{{lister.0}}</h6>
+                     {% set lstid = (n.0) %}
+                     {% set userid = (n.1) %}
+                     <a class = "btn btn-primary" href = "{{ url_for('message', sender_id=userid, listing_id=lstid)}}">Message</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Property description -->
+      <div class="row border-top w-75 p-3">
+         <div class="col-12">
+            <div class="row">
+               <h6>Property Description</h6>
+            </div>
+            <div class="row">
+               <p>{{n.18}}</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Reply Modal -->
+   <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+         <div class="modal-content p-5">
+            {% include "includes/form_message.html" %}
+         </div>
+      </div>
+   </div>
+   {%endfor%}

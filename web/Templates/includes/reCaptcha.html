@@ -1,0 +1,27 @@
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<div class="form-group">
+  <script>
+    var onloadCallback = function() {
+      grecaptcha.render('reCaptcha', {
+        'sitekey': '6LfSCaMUAAAAAIgZIdJ-I_IKtwiKFg8OggJcJwOn',
+      });
+    }
+  </script>
+  <br />
+  <!-- POST's back upon submit with the grecaptcha response POST parameter. -->
+  <div action="?" method="POST">
+    <div id="reCaptcha"></div>
+  </div>
+</div>
+<!-- recaptcha validation; forces user to complete the captcha before proceeding. -->
+<script>
+  function validateRecaptcha() {
+    var response = grecaptcha.getResponse();
+    if (response.length === 0) {
+      alert("Please complete the Captcha");
+      return false;
+    } else {
+      return true;
+    }
+  }
+</script>

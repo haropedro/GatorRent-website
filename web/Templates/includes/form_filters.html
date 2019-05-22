@@ -1,0 +1,102 @@
+{% block scripts %}
+<script src="../../static/js/clearFilterInputs.js?nn11"></script>
+{% endblock %}
+
+<div class="container py-3" id='filter-panel'>
+   <h3 class="text-center">Filters</h3>
+   <form class="form-group" method="post" action="{{ url_for('results') }}">
+      <ul class="list-group py-3">
+         <li class="list-group-item justify-content-between">
+            <div class="container">
+               <h6>Price range</h6>
+               <div class="form-inline py-2 mx-2 justify-content-between">
+                  <input type="number" class="form-control" name="minprice" placeholder="min"
+                  {% if persistence[0] %}
+                  value={{ persistence[0] }}
+                  {% endif %}
+                     style="width:40%">
+                  <small class="mx-2">-</small>
+                  <input type="number" class="form-control" name="maxprice" placeholder="max"
+                  {% if persistence[1] %}
+                  value={{ persistence[1] }}
+                  {% endif %}
+                     style="width:40%">
+               </div>
+            </div>
+         </li>
+         <li class="list-group-item justify-content-between">
+            <div class="container">
+               <h6>Location</h6>
+               <div class="py-2 mx-2 justify-content-between">
+                  <div class="row py-1">
+                     <label for="city" class="col-sm-4 col-form-label">City</label>
+                     <div class="col-sm-8">
+                        <input type="text" class="form-control" name="city" style="width:100%"
+                        {% if persistence[2] %}
+                        value={{ persistence[2] }}
+                        {% endif %}
+                        >
+                     </div>
+                  </div>
+                  <div class="row py-1">
+                     <label for="postcode" class="col-sm-4 col-form-label">Postcode</label>
+                     <div class="col-sm-8">
+                        <input type="number" class="form-control" name="postcode" style="width:100%"
+                        {% if persistence[3] %}
+                        value={{ persistence[3] }}
+                        {% endif %}
+                        >
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </li>
+         <li class="list-group-item justify-content-between">
+            <div class="container">
+               <h6>Miles from campus</h6>
+               <div class="form-inline py-2 mx-2 justify-content-between">
+                  <input type="number" class="form-control" name="mindistance" placeholder="min"
+                  {% if persistence[4] %}
+                  value={{ persistence[4] }}
+                  {% endif %}
+                     style="width:40%">
+                  <small class="mx-2">-</small>
+                  <input type="number" class="form-control" name="maxdistance" placeholder="max"
+                  {% if persistence[5] %}
+                  value={{ persistence[5] }}
+                  {% endif %}
+                  style="width:40%">
+               </div>
+            </div>
+         </li>
+         <li class="list-group-item justify-content-between">
+            <div class="container">
+               <h6>Living preferences</h6>
+               <div class="py-2 mx-2 justify-content-between">
+                  <div class="form-check justify-content-start">
+                     <input class="form-check-input" type="checkbox" name="shared"
+                     {% if persistence[9] %}
+                     checked
+                     {% endif %}
+                     >
+                     <label class="form-check-label" for="shared">Room or Housemates</label>
+                  </div>
+                  <div class="form-check justify-content-start">
+                     <input class="form-check-input" type="checkbox" name="pets"
+                     {% if persistence[10] %}
+                     checked
+                     {% endif %}
+                     >
+                     <label class="form-check-label" for="pets">Pets allowed</label>
+                  </div>
+               </div>
+            </div>
+         </li>
+      </ul>
+      <div class="container text-center">
+         <button class="btn btn-lg btn-secondary" type="reset" onclick="return clearFilterInputs(this.form);" >Clear</button>
+         <button class="btn btn-lg btn-primary" type="submit">Filter</button>
+      </div>
+   </form>
+   <div id="clear-alert-flash" class="alert alert-success" style="display:none;">Filter Cleared!</div>
+</div>

@@ -1,0 +1,64 @@
+<!--
+    Queries:
+        1. Must return all messages with sender_id equal with session user_id.
+        2. Must be able to remove message with id.
+    Required database: message
+    Required data: timestamp, sender_id, listing_id, body
+-->
+
+<form class="w-25 py-5" method="post" oninput='passwordconfirm.setCustomValidity(passwordconfirm.value != password.value ? "Passwords do not match." : "")' onsubmit="return validateRecaptcha();">
+   <h3>Register for GatorRent</h3>
+      <div class="form-group my-4">
+         <div class="form-group">
+            <label>Username <small class="text-muted">(Maximum 30 characters)</small></label>
+            <input type="text" id="username" name="username" class="form-control" minlength="5" maxlength="30" placeholder="Enter username" required autofocus>
+         </div>
+         <div class="form-group">
+            <label>Password <small class="text-muted">(Maximum 15 characters)</small></label>
+            <input type="password" id="password" name="password"class="form-control" maxlength="15" placeholder="Enter password" required
+            {% if persistence[0] %}
+            value={{ persistence[0] }}
+            {% endif %}
+            >
+         </div>
+         <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" id="passwordconfirm" name="passwordconfirm" class="form-control" maxlength="15" placeholder="Confirm password" required
+            {% if persistence[0] %}
+            value={{ persistence[0] }}
+            {% endif %}
+            >
+         </div>
+         <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter email" required
+            {% if persistence[1] %}
+            value={{ persistence[1] }}
+            {% endif %}
+            >
+         </div>
+         <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="agree" name="agree" required
+            {% if persistence[2] %}
+            checked
+            {% endif %}
+            >
+            <label class="form-check-label small" for="agree">I agree to the <a href="#">Terms and Conditions</a>.</label>
+         </div>
+            <div class="row justify-content-center">
+               {% include "includes/reCaptcha.html" %}
+            </div>
+         </div>
+
+       {% with errors = get_flashed_messages() %}
+         {% if errors %}
+            {% for e in errors %}
+            <div class="alert alert-warning">
+               {{e}}
+            </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+      <button class="btn btn-primary w-100" type="submit" value="login">Register</button>
+      <small>Already have an account? <a href="{{ url_for('login') }}">Login</a></small>
+</form>

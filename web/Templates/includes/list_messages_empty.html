@@ -1,0 +1,40 @@
+<!--
+    Queries:
+        1. Must return all messages with sender_id equal with session user_id.
+        2. Must be able to remove message with id.
+    Required database: message
+    Required data: timestamp, sender_id, listing_id, body
+-->
+{% include "includes/flash_warning.html" %}
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <!-- Table header -->
+    <thead>
+      <tr class="bg-info text-light">
+        <th scope="col" style="width:10%;">Date</th>
+        <th scope="col" style="width:10%;">From</th>
+        <th scope="col" style="width:15%;">Listing ID</th>
+        <th scope="col" style="width:30%;">Message</th>
+        <th scope="col" style="width:20%;">Options</th>
+      </tr>
+    </thead>
+    <!-- Table content -->
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+
+        <td></td>
+        <td>
+          <span class="d-inline-block text-truncate font-weight-light" style="max-width:450px;">
+          </span>
+        </td>
+        <td>
+          <ul class="list-group list-group-horizontal-sm">
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

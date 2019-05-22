@@ -1,0 +1,11 @@
+<!--Submission confirmation, allows user to return to the main listing results page-->
+<form action ="">
+{% block head %}
+  <title>Messages</title>
+{% endblock %}
+
+{% block body %}
+  <h2>Message Sent!</h2>
+  <a href="{{ url_for('results') }}">Go back to the main page</a>
+{% endblock %}
+</form>

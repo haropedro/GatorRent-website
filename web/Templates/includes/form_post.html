@@ -1,0 +1,333 @@
+<form action="" method='POST' enctype="multipart/form-data" class="w-50 pt-3 pb-5">
+
+  <br/>
+  <h3> Post a Listing</h3>
+  <br/>
+
+  <div class="form-row">
+
+      <div class="form-group w-100">
+        <label for="rent-type">Rental Type<small class="font-weight-bold text-primary mb-2"> *</small></label>
+        <div>
+          <div class="form-check-inline ml-3">
+              <input type="radio" name="rent-type" value="1" required
+              {% if request.cookies.get('rent-type') == '2' %}
+              checked
+              {% endif %}
+              >
+              <label class="form-check-label mx-3" for="houseRadio">House</label>
+            </div>
+            <div class="form-check-inline">
+              <input type="radio" name="rent-type" value="2"
+              {% if request.cookies.get('rent-type') == '1' %}
+              checked
+              {% endif %}
+              >
+              <label class="form-check-label mx-3" for="apartmentRadio">Apartment</label>
+            </div>
+            <div class="form-check-inline">
+              <input type="radio" name="rent-type" value="3"
+              {% if request.cookies.get('rent-type') == '3' %}
+              checked
+              {% endif %}
+              >
+              <label class="form-check-label mx-3" for="roomRadio">Room</label>
+            </div>
+        </div>
+      </div>
+
+    <hr>
+
+    <div class="form-group col-md-6">
+      <label for="size">Property Size<small class="font-weight-bold text-primary mb-2"> *</small></label>
+      <input name="size" type="number" min="0" step=".01" onkeyup="this.value = this.value.replace(/[^0-9.]/g, '');" class="form-control" id="size" placeholder="In Square Feet" required
+      {% if request.cookies.get('size')%}
+      value={{ request.cookies.get('size') }}
+      {% endif %}
+      >
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="price">Price<small class="font-weight-bold text-primary mb-2"> *</small></label>
+      <input name="price" type="number" min="0" step=".01" onkeyup="this.value = this.value.replace(/[^0-9.]/g, '');" class="form-control" id="price" placeholder="$0.00" required
+      {% if request.cookies.get('price')%}
+      value={{ request.cookies.get('price') }}
+      {% endif %}
+      >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Address<small class="font-weight-bold text-primary mb-2"> *</small></label>
+    <input name="address" type="text" class="form-control" placeholder="1234 Main St" oninput="Address_validator(this)" required
+    {% if request.cookies.get('address')%}
+    value="{{ request.cookies.get('address')}}"
+    {% endif %}
+    >
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-6">
+      <label for="city">City<small class="font-weight-bold text-primary mb-2"> *</small></label>
+      <input id="city" name="city" type="text"class="form-control" oninput="City_validator(this)" required
+      {% if request.cookies.get('city')%}
+      value="{{ request.cookies.get('city')}}"
+      {% endif %}
+      >
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputState">State<small class="font-weight-bold text-primary mb-2"> *</small></label>
+        <select name="state" class="form-control selectpicker" required>
+          {% if request.cookies.get('state')%}
+          <option value={{ request.cookies.get('state') }} selected="selected">
+            {{ request.cookies.get('state') }}
+          </option>
+          {% endif %}
+          <option value="">N/A</option>
+          <option value="Alabama">Alabama</option>
+          <option value="Alaska">Alaska</option>
+          <option value="Arizona">Arizona</option>
+          <option value="Arkansas">Arkansas</option>
+          <option value="California">California</option>
+          <option value="Colorado">Colorado</option>
+          <option value="Connecticut">Connecticut</option>
+          <option value="Delaware">Delaware</option>
+          <option value="Florida">Florida</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Hawaii">Hawaii</option>
+          <option value="Idaho">Idaho</option>
+          <option value="Illinois">Illinois</option>
+          <option value="Indiana">Indiana</option>
+          <option value="Iowa">Iowa</option>
+          <option value="Kansas">Kansas</option>
+          <option value="Kentucky">Kentucky</option>
+          <option value="Louisiana">Louisiana</option>
+          <option value="Maine">Maine</option>
+          <option value="Maryland">Maryland</option>
+          <option value="Massachusetts">Massachusetts</option>
+          <option value="Michigan">Michigan</option>
+          <option value="Minnesota">Minnesota</option>
+          <option value="Mississippi">Mississippi</option>
+          <option value="Missouri">Missouri</option>
+          <option value="Montana">Montana</option>
+          <option value="Nebraska">Nebraska</option>
+          <option value="Nevada">Nevada</option>
+          <option value="New Hampshire">New Hampshire</option>
+          <option value="New Jersey">New Jersey</option>
+          <option value="New Mexico">New Mexico</option>
+          <option value="New York">New York</option>
+          <option value="North Carolina">North Carolina</option>
+          <option value="North Dakota">North Dakota</option>
+          <option value="Ohio">Ohio</option>
+          <option value="Oklahoma">Oklahoma</option>
+          <option value="Oregon">Oregon</option>
+          <option value="Pennsylvania">Pennsylvania</option>
+          <option value="Rhode Island">Rhode Island</option>
+          <option value="South Carolina">South Carolina</option>
+          <option value="South Dakota">South Dakota</option>
+          <option value="Tennessee">Tennessee</option>
+          <option value="Texas">Texas</option>
+          <option value="Utah">Utah</option>
+          <option value="Vermont">Vermont</option>
+          <option value="Virginia">Virginia</option>
+          <option value="Washington">Washington</option>
+          <option value="West Virginia">West Virginia</option>
+          <option value="Wisconsin">Wisconsin</option>
+          <option value="Wyoming">Wyoming</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="postcode">Postcode<small class="font-weight-bold text-primary mb-2"> *</small> </label>
+      <input name="postcode" type="text" onKeyPress="if(this.value.length==5) return false;" class="form-control" id="postcode" oninput="Postcode_validator(this)" required
+      {% if request.cookies.get('postcode')%}
+      value={{ request.cookies.get('postcode') }}
+      {% endif %}
+      >
+    </div>
+
+  </div> <!-- End of City, State and Postcode row -->
+
+  <hr>
+
+  <div class="row m-3">
+  <div class="form-group col-md-6 text-center">
+    <label for="petsallowed">Are pets allowed on the property?<small class="font-weight-bold text-primary mb-2"> *</small></label>
+    <div>
+      <div class="form-check-inline">
+          <input type="radio" name="pets" id="petRadioYes" value="1" required
+          {% if request.cookies.get('pets') == '1' %}
+          checked
+          {% endif %}
+          >
+          <label class="form-check-label mx-3" for="petRadioYes">Yes</label>
+        </div>
+        <div class="form-check-inline">
+          <input type="radio" name="pets" id="petRadioNo" value="0"
+          {% if request.cookies.get('pets') == '0' %}
+          checked
+          {% endif %}
+          >
+          <label class="form-check-label mx-3" for="petRadioNo">No</label>
+        </div>
+    </div>
+  </div>
+
+  <div class="form-group col-md-6 text-center">
+    <label for="sharedroom">Is your property a shared room?<small class="font-weight-bold text-primary mb-2"> *</small></label>
+    <div>
+        <div class="form-check-inline">
+            <!-- Shared Room yes radio button  -->
+            <input type="radio" name="sharedroom" id="roomShareRadYes" value="1" required
+            {% if request.cookies.get('sharedroom') == '1'%}
+            checked
+            {% endif %}
+            >
+            <label class="form-check-label mx-3" for="roomShareRadYes">Yes</label>
+        </div>
+        <div class="form-check-inline">
+            <!-- Shared Room No radio button  -->
+            <input type="radio" name="sharedroom" id="roomShareRadNo" value="0"
+            {% if request.cookies.get('sharedroom') == '0' %}
+            checked
+            {% endif %}
+            >
+            <label class="form-check-label mx-3" for="roomShareRadNo">No</label>
+        </div>
+    </div>
+  </div>
+</div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-8">
+      <label for="images">Upload Images<small class="font-weight-bold text-primary mb-2"> *</small></label>
+    </div>
+    <div class="col-md-6">
+      <input name="images" type="file" multiple class="form-control-file" id="imageUpload" accept="image/*" onchange="Thumbnail_Selector(this);" required>
+    </div>
+    <div class="col-md-12" id="image-expand"></div>
+  </div>
+
+
+
+  <br/>
+
+  <hr>
+
+  <div class="form-group">
+    <label for="title">Title<span class="text-muted"> Optional (Maximum 50 Characters)</span></label>
+      <input id="title" name="title" type="text"  maxlength="50" class="form-control col-md-12" oninput="City_validator(this)" placeholder="This will be the headline for your listing."
+      {% if request.cookies.get('title')%}
+      value="{{ request.cookies.get('title')}}"
+      {% endif %}
+      >
+  </div>
+
+  <div class="form-group">
+    <label for="description">Property Description <span class="text-muted">Optional (Maximum 300 Words)</span></label>
+    <div> <!-- Do not wrap/shorten this line -->
+      <textarea class="form-control" name="description" id="description" maxlength="2000" cols="73" rows="5" placeholder="Affordable accommodation in friendly neighborhood + walking distance to SFSU.">{% if request.cookies.get('description') %}{{request.cookies.get('description')}}{% endif %}</textarea>
+    </div>
+  </div>
+
+  {% with errors = get_flashed_messages() %}
+    {% if errors %}
+     {% for e in errors %}
+     <div class="alert alert-warning">
+        {{e}}
+     </div>
+     {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-4">
+      <!-- Form submit button -->
+      <button class="btn btn-primary w-100" type="submit">Post it!</button>
+    </div>
+  </div <!-- End of submit button class row -->
+
+</form>
+
+<style>
+/* Style Specific to Thumbnail Button Selection */
+input[type="image"]:focus,
+.uneditable-input:focus {
+  border-color: rgba(243, 227, 7, 0.877);
+  box-shadow: 0 1px 1px rgba(178, 8, 230, 0.075) inset, 0 0 20px rgba(88, 4, 243, 0.8);
+  outline: 0 none;
+}
+</style>
+
+<!-- Address, City and Postcode input validation -->
+<script>
+  function City_validator(input){
+    var input1 = /[^a-z ]/gi;
+    input.value = input.value.replace(input1, "");
+  }
+  function Address_validator(input){
+    var input2 = /[^a-z0-9,#\- ]/gi;
+    input.value = input.value.replace(input2, "");
+  }
+  function Postcode_validator(input){
+    var input3 = /[^0-9]/gi;
+    input.value = input.value.replace(input3, "");
+  }
+
+  // displays uploaded images
+  function Thumbnail_Selector(input, parent){
+    var parent = document.getElementById("image-expand");
+
+    // remove all child elements
+    while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+    }
+
+    parent.innerHTML = '<br/><label for="thumbnail">Select Thumbnail<small class="font-weight-bold text-primary mb-2"> *</small></label><input id="thumbnail" name="thumbnail" type="hidden" value="" required><br/>';
+    document.getElementById("thumbnail").setAttribute("value" , "");
+
+    if (input.files) {
+      var fileNum = input.files.length;
+
+      for (i = 0; i < fileNum; i++) {
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          var filenm = e.target.fileName;
+
+          var img = $($.parseHTML('<input>')).
+          attr('type', "image").
+          attr('name', "thumbnail").
+          attr('src', e.target.result).
+          attr('width', "200").
+          attr('height', "200").
+          attr('style', "border: 5px solid transparent;").
+          attr('onsubmit', "return false;").
+          attr('value', filenm);
+          // overrides input type image from submitting form upon clicking
+          img.click(function(event){
+            event.preventDefault();
+            setValue(filenm)
+          })
+          img.appendTo(parent);
+
+        };
+        reader.fileName = input.files[i].name;
+        reader.readAsDataURL(input.files[i]);
+      }
+
+    }
+  }
+
+  // get filename from selected thumbnail
+  function setValue(input){
+    document.getElementById("thumbnail").value = input;
+  }
+</script>

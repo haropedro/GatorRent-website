@@ -1,0 +1,43 @@
+<!-- Authored by Harold Pedroso, 04/24/2019 -->
+<!-- Home page of the website. This will the front page of our website and where
+ the listing will go. This will entice user and engage them in using our application -->
+
+<div class="row w-100 justify-content-center">
+   {% include "includes/flash_warning.html" %}
+   <div class='jumbotron text-center bg-transparent w-100'>
+      <h1 class="display-4">Browse, rent, or post housing</h1>
+      <p class="lead">Specifically designed and targeted for San Francisco State University students.</p>
+      <hr class="my-2 w-50">
+      <p class="mb-4 text-muted">Take a look at our most recent listings below, search above for something specific, or <a href="{{ url_for('results')}}">click here</a> to view all properties.</p>
+      <div class="row justify-content-center">
+         {% for n in latest %}
+            <div class="col-auto my-2 mx-2">
+               <div class="card shadow-sm" style="width: 18rem;">
+                     {% set lstid = (n.0) %}
+                     {% set userid = (n.1) %}
+                     <a href="{{ url_for('listing', user_id=userid, listing_id=lstid)}}">
+                        <img class="card-img-top" src={{n.17}} style="height: 15rem;">
+                     </a>
+                     <div class="card-body align-content-start text-left">
+                     <h6 class="card-title text-capitalize">{{n.19}}</h6>
+                     <div class="card-text">
+                        <p>
+                           Price: ${{n.3}}/month <br>
+                           {{n.8}} <br>
+                           <small class="text-muted">{{n.9}}, {{n.12}}</small>
+                        </p>
+                     </div>
+                     <div class="d-flex justify-content-center">
+                        <div>
+                           {% set lstid = (n.0) %}
+                           {% set userid = (n.1) %}
+                           <a href="{{ url_for('listing', user_id=userid, listing_id=lstid )}}" class="btn btn-sm btn-secondary">More Info</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         {% endfor %}
+      </div>
+   </div>
+</div>

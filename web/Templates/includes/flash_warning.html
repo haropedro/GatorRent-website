@@ -1,0 +1,9 @@
+{% with errors = get_flashed_messages() %}
+    {% if errors %}
+        {% for e in errors %}
+        <div class="alert alert-warning">
+            {{e}}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}

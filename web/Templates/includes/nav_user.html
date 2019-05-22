@@ -1,0 +1,9 @@
+<nav class="nav flex-column nav-pills">
+    <div class='d-flex border-bottom py-3 text-capitalize justify-content-center'>
+        <h3 class="text-center">{{ session['username'] }}'s dashboard</h3>
+    </div>
+    <div class='flex-column py-3'>
+        <a class="nav-link {% if (active_page == 'user_messages_empty') or (active_page == 'user_messages') %}active{% endif %}" href="{{ url_for('user_messages') }}">Messages</a>
+        <a class="nav-link {% if active_page == 'user_listings' %}active{% endif %}" href="{{ url_for('user_listings') }}">Listings</a>
+    </div>
+</nav>

@@ -1,0 +1,63 @@
+<div class="container py-3">
+   <div class="row justify-content-md-start justify-content-sm-center m-0">
+      <div class="alert alert-secondary text-center mx-4 my-3" role="alert" style="width:100%">
+         {% if message %}
+            <p class="mb-0">{{message}}</p>
+         {% else %}
+            {% if listings | length <= 1 %}
+               <p class="mb-0">Showing {{listings | length}} listing.</p>
+            {% else %}
+               <p class="mb-0">Showing {{listings | length}} listings.</p>
+            {% endif %}
+         {% endif %} 
+      </div>
+      {% for n in listings %}
+       <!-- Only allow approved listings -->
+       {% if n.15 == 1%}
+         {% set lstid = (n.0) %}
+         {% set userid = (n.1) %}
+         {% set description = (n.19) %}
+         {% set renttype = (n.2) %}
+         {% set price = (n.3) %}
+         {% set distance = (n.4) %}
+         {% set petstatus = (n.5) %}
+         {% set shared = (n.6) %}
+         {% set status = (n.7) %}
+         {% set street = (n.8) %}
+         {% set city = (n.9) %}
+         {% set state = (n.10) %}
+         {% set country = (n.11) %}
+         {% set postcode = (n.12) %}
+         {% set title = (n.20) %}
+         {% set lat = (n.13) %}
+         {% set long = (n.14) %}
+         {% set approved = (n.15) %}
+         {% set image_id = (n.16) %}
+         {% set thumbnailpath = (n.19) %}
+         <div class="col-auto my-2 mx-2 justify-content-start">
+            <div class="card shadow-sm" style="width: 18rem;">
+               <a href="{{ url_for('listing', user_id=userid, listing_id=lstid)}}">
+                  <img class="card-img-top" src={{n.17}} style="height: 15rem;">
+               </a>
+               <div class="card-body">
+                     <h6 class="card-title text-capitalize">{{n.19}}</h6>
+                     <div class="card-text">
+                        <p>
+                           Price: ${{n.3}}/month <br>
+                           {{n.8}} <br>
+                           <small class="text-muted">{{n.9}}, {{n.12}}</small>
+                        </p>
+                     </div>
+                     <div class="d-flex justify-content-end">
+                        <div>
+                        <a href="{{ url_for('listing', user_id=userid, listing_id=lstid)}}" class="btn btn-sm btn-secondary">More Info</a>
+                        <a href="{{ url_for('message', sender_id=userid, listing_id=lstid)}}" class="btn btn-sm btn-primary">Message</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endif %}
+      {% endfor %}
+   </div>
+</div>

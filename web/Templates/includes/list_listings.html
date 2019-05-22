@@ -1,0 +1,88 @@
+<!--
+    Queries:
+        1. Must return all listings with user_id equal with session user_id.
+        2. Must be able to remove listing with id.
+    Required database: listing
+    Required data: isApproved, timestamp, street, city, state, postcode
+-->
+{% include "includes/flash_warning.html" %}
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <!-- Table header -->
+        <thead>
+            <tr class="bg-info text-light">
+                <th scope="col" style="width:10%;">Approved</th>
+                <th scope="col" style="width:10%;"><i class="fas fa-home"></i></th>
+                <th scope="col" style="width:10%;">Date</th>
+                <th scope="col" style="width:10%;">Title</th>
+                <th scope="col" style="width:30%;">Description</th>
+                <th scope="col" style="width:20%;">Address</th>
+                <th scope="col" style="width:35%;">Price</th>
+                <th scope="col" style="width:20%;">Pets</th>
+                <th scope="col" style="width:20%;">Shared</th>
+                <th scope="col" style="width:10%;"></th>
+            </tr>
+        </thead>
+        {% if listing_table is defined %}
+        {% for n in listings %}
+        <!-- Table content -->
+        <tbody>
+            <tr>
+                {% if n.15 == 1 %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+                {% if n.2 == 1 %}
+                    <td>Apartment</td>
+                {% elif n.0 == 2 %}
+                    <td>House</td>
+                {% else %}
+                    <td>Room</td>
+                {% endif %}
+                    <td>{{n.20}}</td>
+                {% if n.11 %}
+                    <td>{{n.19}}</td>
+                {% else %}
+                    <td>Empty</td>
+                {% endif %}
+                {% if n.10 %}
+                    <td>{{n.19}}</td>
+                {% else %}
+                    <td>Empty</td>
+                {% endif %}
+                    <td>{{n.8}} {{n.9}} {{n.10}}</td>
+                    <td>$ {{n.3}}</td>
+                {% if n.5 == 1 %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+                {% if n.6 == 1 %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+                <td>
+
+                {% set lstid = (n.0) %}
+                {% set userid = (n.1) %}
+
+                    {% if n.15 == 1%}
+                    <ul class="list-group list-group-horizontal-sm">
+                        <a href="{{ url_for('listing', user_id=userid, listing_id=lstid ) }}" class="list-group-item py-1">View</a>
+                    </ul>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td class="text-center text-muted" colspan="10">You don't have any listings.</td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+
