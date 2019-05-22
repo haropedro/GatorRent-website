@@ -1,0 +1,25 @@
+<html lang="en">
+
+{% include "includes/head.html" %}
+
+<body>
+   {% include "includes/nav_brand.html" %}
+   {% include "includes/nav_main.html" %}
+
+   <div class="d-flex justify-content-center align-items-center" style="overflow:hidden;">
+      <div class="row" style="min-width:100%; min-height:100%">
+         <div class="col-md-3 shadow p-3" style="min-height:40rem">
+            {% block navigation %}
+            {% endblock %}
+         </div>
+         <div class="col-md-9 p-3">
+            {% block content %}
+            {% endblock %}
+         </div>
+      </div>
+   </div>
+
+   {% include "includes/footer.html" %}
+</body>
+
+</html>

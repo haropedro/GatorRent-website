@@ -1,0 +1,17 @@
+<html lang="en">
+
+{% include "includes/head.html" %}
+
+<body>
+   {% include "includes/nav_brand.html" %}
+   {% include "includes/nav_main.html" %}
+
+   <div class="d-flex justify-content-center align-items-center" style="min-height:75%;">
+      {% block content %}
+      {% endblock %}
+   </div>
+
+   {% include "includes/footer.html" %}
+</body>
+
+</html>
