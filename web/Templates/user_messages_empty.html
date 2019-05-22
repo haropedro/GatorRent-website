@@ -1,0 +1,18 @@
+<!--
+    Queries:
+        1. Must return all messages with sender_id equal with session user_id.
+        2. Must be able to remove message with id.
+    Required database: message
+    Required data: timestamp, sender_id, listing_id, body
+-->
+
+{% extends "bases/sidenavbase.html" %}
+{% set active_page = 'user_messages_empty' %}
+
+{% block navigation %}
+{% include "includes/nav_user.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/list_messages_empty.html" %}
+{% endblock %}

@@ -1,0 +1,18 @@
+<!--
+    Queries:
+        1. Must return all listings with user_id equal with session user_id.
+        2. Must be able to remove listing with id.
+    Required database: listing
+    Required data: isApproved, timestamp, street, city, state, postcode
+-->
+
+{% extends "bases/sidenavbase.html" %}
+{% set active_page = 'user_listings' %}
+
+{% block navigation %}
+{% include "includes/nav_user.html" %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/list_listings.html" %}
+{% endblock %}
