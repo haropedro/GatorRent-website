@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "80:5000"
+    links:
+      - db
+    volumes:
+      - ./web:/web
+  db:
+    image: mysql:5.7
+    ports:
+      - "8080:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PSSWRD}

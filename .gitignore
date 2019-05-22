@@ -1,0 +1,15 @@
+# Environments
+.env
+.vscode
+venv/
+
+# Dev + Deployment Configs
+*.yml
+Dockerfile
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+.DS_Store
+
+# listing images
+gallery/
