@@ -1,6 +1,6 @@
 # Group 8 Accommodation Matching Site
 
-<!--TODO improve description --> [replace with site name] is a website that
+<!--TODO improve description --> GatorRent is a website that
 helps students find off campus accommodation. Accommodations listed are public
 listings. The listings aim to be affordable for college students in the area.
 Arrangements made outside the realm of this site e.g. email with listing owner
